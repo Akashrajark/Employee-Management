@@ -1,17 +1,20 @@
+import 'package:employee_manager/data/employee/employeemodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../values/color.dart';
 import '../custom_action_button.dart';
 import '../custom_alert_dialog.dart';
+import 'add_edit_employee_dialog.dart';
 
 class RegionTable extends StatelessWidget {
   final bool scrollable, isLoading;
-  final List<dynamic> regions;
+ 
   const RegionTable({
     super.key,
     this.scrollable = true,
     this.isLoading = false,
-    required this.regions,
+    
   });
 
   @override
@@ -24,7 +27,7 @@ class RegionTable extends StatelessWidget {
             Expanded(
               flex: 4,
               child: SelectableText(
-                'REGION',
+                'NAME',
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w600,
@@ -36,7 +39,7 @@ class RegionTable extends StatelessWidget {
             Expanded(
               flex: 4,
               child: SelectableText(
-                'DESCRIPTION',
+                'EMAIL',
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w600,
@@ -46,9 +49,35 @@ class RegionTable extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 6,
+              flex: 4,
               child: SelectableText(
-                'ACTIONS',
+                'CONTACT NO',
+                textAlign: TextAlign.end,
+                style: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: mutedTextColor,
+                      ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: SelectableText(
+                'DATE OF JOINING',
+                textAlign: TextAlign.end,
+                style: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: mutedTextColor,
+                      ),
+                ),
+              ),
+            ),
+             Expanded(
+              flex: 4,
+              child: SelectableText(
+                'ELIGIBLE FOR PROMOTION',
                 textAlign: TextAlign.end,
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -71,7 +100,7 @@ class RegionTable extends StatelessWidget {
             height: 1,
           ),
         Flexible(
-          child: regions.isEmpty && !isLoading
+          child:dummyEmployeeData.isEmpty&& !isLoading
               ? const Padding(
                   padding: EdgeInsets.all(30.0),
                   child: Text('No regions found!'),
@@ -81,12 +110,12 @@ class RegionTable extends StatelessWidget {
                   physics:
                       scrollable ? null : const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => RegionRow(
-                    regionDetails: regions[index],
+                    employeeDetail: dummyEmployeeData[index],
                   ),
                   separatorBuilder: (context, index) => const Divider(
                     height: 1,
                   ),
-                  itemCount: regions.length,
+                  itemCount: dummyEmployeeData.length,
                 ),
         ),
       ],
@@ -95,10 +124,10 @@ class RegionTable extends StatelessWidget {
 }
 
 class RegionRow extends StatefulWidget {
-  final Map<String, dynamic> regionDetails;
+  final EmployeeModel employeeDetail;
   const RegionRow({
     super.key,
-    required this.regionDetails,
+    required this.employeeDetail,
   });
 
   @override
@@ -129,7 +158,7 @@ class _RegionRowState extends State<RegionRow> {
               Expanded(
                 flex: 4,
                 child: SelectableText(
-                  widget.regionDetails['name'],
+                  widget.employeeDetail.name,
                   style: GoogleFonts.montserrat(
                     textStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -142,7 +171,7 @@ class _RegionRowState extends State<RegionRow> {
               Expanded(
                 flex: 4,
                 child: SelectableText(
-                  widget.regionDetails['description'],
+                  widget.employeeDetail.email,
                   style: GoogleFonts.montserrat(
                     textStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -152,59 +181,59 @@ class _RegionRowState extends State<RegionRow> {
                   ),
                 ),
               ),
-              Expanded(
-                flex: 6,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomActionButton(
-                      iconData: Icons.edit_outlined,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AddEditRegionDialog(
-                            regionDetails: widget.regionDetails,
-                            onEdit: (region, regionId) {
-                              BlocProvider.of<RegionBloc>(context).add(
-                                EditRegion(
-                                  region: region,
-                                  regionId: regionId,
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      color: Colors.orange,
-                    ),
-                    const SizedBox(width: 10),
-                    CustomActionButton(
-                      iconData: Icons.delete_forever_outlined,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) => CustomAlertDialog(
-                            title: 'DELETE REGION?',
-                            description:
-                                'Are you sure you want to delete this region?',
-                            primaryButton: 'DELETE',
-                            onPrimaryPressed: () {
-                              BlocProvider.of<RegionBloc>(context).add(
-                                DeleteRegion(
-                                  regionId: widget.regionDetails['id'],
-                                ),
-                              );
-                              Navigator.pop(context);
-                            },
-                            secondaryButton: 'NO',
-                          ),
-                        );
-                      },
-                      color: Colors.red,
-                    ),
-                  ],
-                ),
-              ),
+              // Expanded(
+              //   flex: 6,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.end,
+              //     children: [
+              //       CustomActionButton(
+              //         iconData: Icons.edit_outlined,
+              //         onPressed: () {
+              //           showDialog(
+              //             context: context,
+              //             builder: (_) => AddEditRegionDialog(
+              //               regionDetails: widget.regionDetails,
+              //               onEdit: (region, regionId) {
+              //                 // BlocProvider.of<RegionBloc>(context).add(
+              //                 //   EditRegion(
+              //                 //     region: region,
+              //                 //     regionId: regionId,
+              //                 //   ),
+              //                 // );
+              //               },
+              //             ),
+              //           );
+              //         },
+              //         color: Colors.orange,
+              //       ),
+              //       const SizedBox(width: 10),
+              //       CustomActionButton(
+              //         iconData: Icons.delete_forever_outlined,
+              //         onPressed: () {
+              //           showDialog(
+              //             context: context,
+              //             builder: (_) => CustomAlertDialog(
+              //               title: 'DELETE REGION?',
+              //               description:
+              //                   'Are you sure you want to delete this region?',
+              //               primaryButton: 'DELETE',
+              //               onPrimaryPressed: () {
+              //                 // BlocProvider.of<RegionBloc>(context).add(
+              //                 //   DeleteRegion(
+              //                 //     regionId: widget.regionDetails['id'],
+              //                 //   ),
+              //                 // );
+              //                 // Navigator.pop(context);
+              //               },
+              //               secondaryButton: 'NO',
+              //             ),
+              //           );
+              //         },
+              //         color: Colors.red,
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

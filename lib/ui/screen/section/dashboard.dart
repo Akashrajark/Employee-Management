@@ -40,9 +40,9 @@ class _DashboardSectionState extends State<DashboardSection> {
     'take': 20,
   };
 
-  List _orders = [];
+  final List _orders = [];
 
-  Map<String, dynamic> _dashboardData = {
+  final Map<String, dynamic> _dashboardData = {
     'franchises': 0,
     'customers': 0,
     'products': 0,
@@ -141,15 +141,15 @@ class _DashboardSectionState extends State<DashboardSection> {
                   runAlignment: WrapAlignment.start,
                   children: [
                     DashboardItem(
-                      label: 'SALSES TODAY',
-                      value: '₹${_dashboardData['sales_today']}',
-                      iconData: Icons.shopping_cart_outlined,
+                      label: 'EMPLOYEES',
+                      value: '${_dashboardData['sales_today']}',
+                      iconData: Icons.people_alt_outlined,
                       onPressed: () {
                         widget.tabController.animateTo(1);
                       },
                     ),
                     DashboardItem(
-                      label: 'FRANCHISES',
+                      label: 'DEPARTMENTS',
                       value: _dashboardData['franchises'].toString(),
                       iconData: Icons.store_outlined,
                       onPressed: () {
@@ -157,85 +157,14 @@ class _DashboardSectionState extends State<DashboardSection> {
                       },
                     ),
                     DashboardItem(
-                      label: 'CUSTOMERS',
+                      label: 'MANAGERS',
                       value: _dashboardData['customers'].toString(),
-                      iconData: Icons.people_alt_outlined,
+                      iconData: Icons.person_2_outlined,
                       onPressed: () {
                         widget.tabController.animateTo(5);
                       },
                     ),
-                    DashboardItem(
-                      label: 'PRODUCTS',
-                      value: _dashboardData['products'].toString(),
-                      iconData: Icons.widgets_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(4);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'SERVICE AREAS',
-                      value: _dashboardData['service_areas'].toString(),
-                      iconData: Icons.map_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(6);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'CATEGORIES',
-                      value: _dashboardData['categories'].toString(),
-                      iconData: Icons.category_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(7);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'WITHDRAWALS',
-                      value: _dashboardData['withdraws'].toString(),
-                      iconData: Icons.account_balance_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(2);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'COMPLAINTS',
-                      value: _dashboardData['complaints'].toString(),
-                      iconData: Icons.info_outline,
-                      onPressed: () {
-                        widget.tabController.animateTo(8);
-                      },
-                    ),
-                    DashboardItem(
-                      label: "PENDING TODAY",
-                      value: _dashboardData['pending_today'].toString(),
-                      iconData: Icons.shopping_cart_checkout_sharp,
-                      onPressed: () {
-                        widget.tabController.animateTo(1);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'PACKED TODAY',
-                      value: _dashboardData['packed_today'].toString(),
-                      iconData: Icons.conveyor_belt,
-                      onPressed: () {
-                        widget.tabController.animateTo(1);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'OFD TODAY',
-                      value: _dashboardData['ofd_today'].toString(),
-                      iconData: Icons.delivery_dining_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(1);
-                      },
-                    ),
-                    DashboardItem(
-                      label: 'DELIVERED TODAY',
-                      value: _dashboardData['delivered_today'].toString(),
-                      iconData: Icons.inventory_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(1);
-                      },
-                    ),
+                  
                   ],
                 ),
               ],
