@@ -1,5 +1,4 @@
-// import 'package:flutter/cupertino.dart';
-import 'package:employee_manager/data/employee/employeemodel.dart';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,14 +9,14 @@ import '../../widget/employee/add_edit_employee_dialog.dart';
 import '../../widget/employee/employee_table.dart';
 import '../../widget/width_bound.dart';
 
-class RegionSection extends StatefulWidget {
-  const RegionSection({super.key});
+class EmployeeSection extends StatefulWidget {
+  const EmployeeSection({super.key});
 
   @override
-  State<RegionSection> createState() => _RegionSectionState();
+  State<EmployeeSection> createState() => _EmployeeSectionState();
 }
 
-class _RegionSectionState extends State<RegionSection> {
+class _EmployeeSectionState extends State<EmployeeSection> {
   String? query;
   // RegionBloc regionBloc = RegionBloc();
 
@@ -81,7 +80,7 @@ class _RegionSectionState extends State<RegionSection> {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (context) => AddEditRegionDialog(
+                      builder: (context) => AddEditEmployeeDialog(
                         onAdd: (region) {
                           // regionBloc.add(AddRegion(region: region));
                         },
@@ -98,8 +97,8 @@ class _RegionSectionState extends State<RegionSection> {
         const SizedBox(height: 10),
         const Divider(height: 1),
         const SizedBox(height: 20),
-        Expanded(
-          child: RegionTable(
+      const  Expanded(
+          child: EmployeeTable(
             isLoading: true,
            
           ),

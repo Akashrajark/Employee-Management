@@ -159,3 +159,10 @@ String? countryCodeValidator(String? value) {
   }
   return null;
 }
+
+  String? dateValidator(String? value) {
+    if (value == null) {
+      return 'Please select a date.';
+    }
+    return null;
+  }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../values/color.dart';
-import 'change_password.dart';
+
 
 class CustomDrawer extends StatefulWidget {
   final TabController tabController;
@@ -52,8 +52,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               const SizedBox(height: 10),
               DrawerButton(
-                label: 'Regions',
-                iconData: Icons.area_chart_outlined,
+                label: 'Employees',
+                iconData: Icons.people_alt_outlined,
                 onPressed: () {
                   changeIndex(1);
                 },
@@ -61,8 +61,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               const SizedBox(height: 10),
               DrawerButton(
-                label: 'Countries',
-                iconData: Icons.language_outlined,
+                label: 'Managers',
+                iconData: Icons.person_outline,
                 onPressed: () {
                   changeIndex(2);
                 },
@@ -70,34 +70,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               const SizedBox(height: 10),
               DrawerButton(
-                label: 'Staff Type',
-                iconData: Icons.people_alt,
+                label: 'Departments',
+                iconData: Icons.store_outlined,
                 onPressed: () {
                   changeIndex(3);
                 },
                 isSelected: widget.tabController.index == 3,
               ),
-              const SizedBox(height: 10),
-              DrawerButton(
-                label: 'Customers',
-                iconData: Icons.people_alt,
-                onPressed: () {
-                  changeIndex(4);
-                },
-                isSelected: widget.tabController.index == 4,
-              ),
-              const SizedBox(height: 10),
-              DrawerButton(
-                label: 'Change Password',
-                iconData: Icons.inventory_2_outlined,
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => const ChangePasswordDialog(),
-                  );
-                },
-                isSelected: false,
-              ),
+            
             ],
           ),
         ),

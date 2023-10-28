@@ -1,4 +1,6 @@
+import 'package:employee_manager/ui/screen/section/department_section.dart';
 import 'package:employee_manager/ui/screen/section/employee_section.dart';
+import 'package:employee_manager/ui/screen/section/manager_section.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/account_button.dart';
@@ -44,7 +46,10 @@ class _HomeScreenState extends State<HomeScreen>
           DashboardSection(
             tabController: _tabController,
           ),
-          RegionSection()
+          EmployeeSection(),
+          ManagerSection(),
+          DepartmentSection()
+
         ],
       ),
     );

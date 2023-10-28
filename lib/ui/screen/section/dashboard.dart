@@ -147,6 +147,13 @@ class _DashboardSectionState extends State<DashboardSection> {
                       onPressed: () {
                         widget.tabController.animateTo(1);
                       },
+                    ), DashboardItem(
+                      label: 'MANAGERS',
+                      value: _dashboardData['customers'].toString(),
+                      iconData: Icons.person_2_outlined,
+                      onPressed: () {
+                        widget.tabController.animateTo(2);
+                      },
                     ),
                     DashboardItem(
                       label: 'DEPARTMENTS',
@@ -156,17 +163,12 @@ class _DashboardSectionState extends State<DashboardSection> {
                         widget.tabController.animateTo(3);
                       },
                     ),
-                    DashboardItem(
-                      label: 'MANAGERS',
-                      value: _dashboardData['customers'].toString(),
-                      iconData: Icons.person_2_outlined,
-                      onPressed: () {
-                        widget.tabController.animateTo(5);
-                      },
-                    ),
+                   
                   
                   ],
                 ),
+
+                
               ],
             ),
           );

@@ -2,13 +2,15 @@ import 'package:employee_manager/data/employee/employeemodel.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../data/manager/managermodel.dart';
 import '../../../values/color.dart';
 
 
-class EmployeeTable extends StatelessWidget {
+
+class ManagerTable extends StatelessWidget {
   final bool scrollable, isLoading;
  
-  const EmployeeTable({
+  const ManagerTable({
     super.key,
     this.scrollable = true,
     this.isLoading = false,
@@ -49,33 +51,20 @@ class EmployeeTable extends StatelessWidget {
             Expanded(
               flex: 1,
               child: SelectableText(
+                'PASSWORD',
+                textAlign: TextAlign.end,
+                style: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: mutedTextColor,
+                      ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: SelectableText(
                 'CONTACT NO',
-                textAlign: TextAlign.end,
-                style: GoogleFonts.montserrat(
-                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: mutedTextColor,
-                      ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SelectableText(
-                'DATE OF JOINING',
-                textAlign: TextAlign.end,
-                style: GoogleFonts.montserrat(
-                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: mutedTextColor,
-                      ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SelectableText(
-                'YEARS OF EXPERIENCE',
                 textAlign: TextAlign.end,
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -88,7 +77,7 @@ class EmployeeTable extends StatelessWidget {
              Expanded(
               flex: 1,
               child: SelectableText(
-                'ELIGIBLE FOR PROMOTION',
+                'DEPARTMENT',
                 textAlign: TextAlign.end,
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -97,7 +86,25 @@ class EmployeeTable extends StatelessWidget {
                       ),
                 ),
               ),
+              
             ),
+              Expanded(
+              flex: 1,
+              child: SelectableText(
+                'DATE OF JOINING',
+                textAlign: TextAlign.end,
+                style: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: mutedTextColor,
+                      ),
+                ),
+              ),
+              
+            ),
+            
+            
+            
           ],
         ),
         const SizedBox(height: 20),
@@ -111,7 +118,7 @@ class EmployeeTable extends StatelessWidget {
             height: 1,
           ),
         Flexible(
-          child:dummyEmployeeData.isEmpty&& !isLoading
+          child:dummyManagers.isEmpty&& !isLoading
               ? const Padding(
                   padding: EdgeInsets.all(30.0),
                   child: Text('No regions found!'),
@@ -120,13 +127,13 @@ class EmployeeTable extends StatelessWidget {
                   shrinkWrap: true,
                   physics:
                       scrollable ? null : const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => EmployRow(
-                    employeeDetail: dummyEmployeeData[index],
+                  itemBuilder: (context, index) => ManagerRow(
+                     managerDetail: dummyManagers[index],
                   ),
                   separatorBuilder: (context, index) => const Divider(
                     height: 1,
                   ),
-                  itemCount: dummyEmployeeData.length,
+                  itemCount: dummyManagers.length,
                 ),
         ),
       ],
@@ -134,18 +141,18 @@ class EmployeeTable extends StatelessWidget {
   }
 }
 
-class EmployRow extends StatefulWidget {
-  final EmployeeModel employeeDetail;
-  const EmployRow({
+class ManagerRow extends StatefulWidget {
+  final ManagerModel managerDetail;
+  const ManagerRow({
     super.key,
-    required this.employeeDetail,
+    required this.managerDetail,
   });
 
   @override
-  State<EmployRow> createState() => _RegionRowState();
+  State<ManagerRow> createState() => _RegionRowState();
 }
 
-class _RegionRowState extends State<EmployRow> {
+class _RegionRowState extends State<ManagerRow> {
   bool _isHovering = false;
 
   void onHover(e) {
@@ -169,33 +176,7 @@ class _RegionRowState extends State<EmployRow> {
               Expanded(
                 flex: 4,
                 child: SelectableText(
-                  widget.employeeDetail.name,
-                  style: GoogleFonts.montserrat(
-                    textStyle:
-                        Theme.of(context).textTheme.labelMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 6,
-                child: SelectableText(
-                  widget.employeeDetail.email,
-                  style: GoogleFonts.montserrat(
-                    textStyle:
-                        Theme.of(context).textTheme.labelMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 6,
-                child: SelectableText(
-                  widget.employeeDetail.contact_number,
+                  widget.managerDetail.name,
                   style: GoogleFonts.montserrat(
                     textStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -208,7 +189,7 @@ class _RegionRowState extends State<EmployRow> {
               Expanded(
                 flex: 4,
                 child: SelectableText(
-                  widget.employeeDetail.date_of_joining,
+                  widget.managerDetail.email,
                   style: GoogleFonts.montserrat(
                     textStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -219,9 +200,9 @@ class _RegionRowState extends State<EmployRow> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 4,
                 child: SelectableText(
-                  widget.employeeDetail.years_of_experience.toString(),
+                  widget.managerDetail.password,
                   style: GoogleFonts.montserrat(
                     textStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -232,9 +213,9 @@ class _RegionRowState extends State<EmployRow> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 4,
                 child: SelectableText(
-                  widget.employeeDetail.isEligible.toString(),
+                  widget.managerDetail.phonenumber,
                   style: GoogleFonts.montserrat(
                     textStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -244,59 +225,36 @@ class _RegionRowState extends State<EmployRow> {
                   ),
                 ),
               ),
-              // Expanded(
-              //   flex: 6,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.end,
-              //     children: [
-              //       CustomActionButton(
-              //         iconData: Icons.edit_outlined,
-              //         onPressed: () {
-              //           showDialog(
-              //             context: context,
-              //             builder: (_) => AddEditRegionDialog(
-              //               regionDetails: widget.regionDetails,
-              //               onEdit: (region, regionId) {
-              //                 // BlocProvider.of<RegionBloc>(context).add(
-              //                 //   EditRegion(
-              //                 //     region: region,
-              //                 //     regionId: regionId,
-              //                 //   ),
-              //                 // );
-              //               },
-              //             ),
-              //           );
-              //         },
-              //         color: Colors.orange,
-              //       ),
-              //       const SizedBox(width: 10),
-              //       CustomActionButton(
-              //         iconData: Icons.delete_forever_outlined,
-              //         onPressed: () {
-              //           showDialog(
-              //             context: context,
-              //             builder: (_) => CustomAlertDialog(
-              //               title: 'DELETE REGION?',
-              //               description:
-              //                   'Are you sure you want to delete this region?',
-              //               primaryButton: 'DELETE',
-              //               onPrimaryPressed: () {
-              //                 // BlocProvider.of<RegionBloc>(context).add(
-              //                 //   DeleteRegion(
-              //                 //     regionId: widget.regionDetails['id'],
-              //                 //   ),
-              //                 // );
-              //                 // Navigator.pop(context);
-              //               },
-              //               secondaryButton: 'NO',
-              //             ),
-              //           );
-              //         },
-              //         color: Colors.red,
-              //       ),
-              //     ],
-              //   ),
-              // ),
+               Expanded(
+                flex: 4,
+                child: SelectableText(
+                  widget.managerDetail.department,
+                  style: GoogleFonts.montserrat(
+                    textStyle:
+                        Theme.of(context).textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                  ),
+                ),
+              ),
+            
+             Expanded(
+                flex: 4,
+                child: SelectableText(
+                  widget.managerDetail.date_of_joining,
+                  style: GoogleFonts.montserrat(
+                    textStyle:
+                        Theme.of(context).textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                  ),
+                ),
+              ),
+            
+            
+   
             ],
           ),
         ),

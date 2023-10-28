@@ -6,11 +6,11 @@ import '../../../util/validator.dart';
 import '../../../values/color.dart';
 import '../custom_alert_dialog.dart';
 
-class AddEditEmployeeDialog extends StatefulWidget {
+class AddEditManagerDialog extends StatefulWidget {
   final Map<String, dynamic>? regionDetails;
   final Function(Map<String, dynamic> region)? onAdd;
   final Function(Map<String, dynamic> region, int regionId)? onEdit;
-  const AddEditEmployeeDialog({
+  const AddEditManagerDialog({
     super.key,
     this.regionDetails,
     this.onAdd,
@@ -18,13 +18,14 @@ class AddEditEmployeeDialog extends StatefulWidget {
   });
 
   @override
-  State<AddEditEmployeeDialog> createState() => _AddEditEmployeeDialogState();
+  State<AddEditManagerDialog> createState() => _AddEditManagerDialogState();
 }
 
-class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
+class _AddEditManagerDialogState extends State<AddEditManagerDialog> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _departmentController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
@@ -87,6 +88,24 @@ class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
                 validator: alphanumericWithSpecialCharsValidator,
                 decoration: const InputDecoration(
                   hintText: 'Enter Email',
+                ),
+              ),
+               const SizedBox(height: 10),
+              Text(
+                'PASSWORD',
+                style: GoogleFonts.montserrat(
+                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: mutedTextColor,
+                      ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: _emailController,
+                validator: passwordValidator,
+                decoration: const InputDecoration(
+                  hintText: 'Enter Password',
                 ),
               ),
               const SizedBox(height: 10),

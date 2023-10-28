@@ -6,11 +6,11 @@ import '../../../util/validator.dart';
 import '../../../values/color.dart';
 import '../custom_alert_dialog.dart';
 
-class AddEditEmployeeDialog extends StatefulWidget {
+class AddEditDepartmentDialog extends StatefulWidget {
   final Map<String, dynamic>? regionDetails;
   final Function(Map<String, dynamic> region)? onAdd;
   final Function(Map<String, dynamic> region, int regionId)? onEdit;
-  const AddEditEmployeeDialog({
+  const AddEditDepartmentDialog({
     super.key,
     this.regionDetails,
     this.onAdd,
@@ -18,17 +18,16 @@ class AddEditEmployeeDialog extends StatefulWidget {
   });
 
   @override
-  State<AddEditEmployeeDialog> createState() => _AddEditEmployeeDialogState();
+  State<AddEditDepartmentDialog> createState() => _AddEditDepartmentDialogState();
 }
 
-class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
+class _AddEditDepartmentDialogState extends State<AddEditDepartmentDialog> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _departmentController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController dateInput = TextEditingController();
-
+  final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _employeeController = TextEditingController();
+  final TextEditingController _managerController = TextEditingController();
+  
   @override
   void initState() {
     super.initState();
@@ -41,7 +40,7 @@ class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
   @override
   Widget build(BuildContext context) {
     return CustomAlertDialog(
-      title: widget.regionDetails != null ? 'EDIT EMPLOYEE' : 'ADD EMPLOYEE',
+      title: widget.regionDetails != null ? 'EDIT DEPARTMENT' : 'ADD DEPARTMENT',
       content: Padding(
         padding: const EdgeInsets.only(
           top: 15,
@@ -73,7 +72,7 @@ class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
               ),
               const SizedBox(height: 10),
               Text(
-                'EMAIL',
+                'LOCATION',
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w600,
@@ -83,15 +82,15 @@ class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                controller: _emailController,
+                controller: _locationController,
                 validator: alphanumericWithSpecialCharsValidator,
                 decoration: const InputDecoration(
-                  hintText: 'Enter Email',
+                  hintText: 'Enter Location',
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                'DEPARTMENT',
+                'MANAGER ID',
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w600,
@@ -101,15 +100,15 @@ class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                controller: _departmentController,
+                controller: _managerController,
                 validator: alphanumericWithSpecialCharsValidator,
                 decoration: const InputDecoration(
-                  hintText: 'Enter Department',
+                  hintText: 'Enter Manager ID',
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                'PHONE NUMBER',
+                'NO OF EMPLOYEES',
                 style: GoogleFonts.montserrat(
                   textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.w600,
@@ -119,46 +118,14 @@ class _AddEditEmployeeDialogState extends State<AddEditEmployeeDialog> {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                controller: _phoneNumberController,
+                controller: _employeeController,
                 validator: alphanumericWithSpecialCharsValidator,
                 decoration: const InputDecoration(
-                  hintText: 'Enter Phone Number',
+                  hintText: 'Enter No Of Employees',
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                'DATE OF JOINING',
-                style: GoogleFonts.montserrat(
-                  textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: mutedTextColor,
-                      ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                validator: dateValidator,
-                controller: dateInput,
-                decoration: const InputDecoration(
-                    icon: Icon(Icons.calendar_today), labelText: "Enter Date"),
-                readOnly: true,
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1950),
-                      lastDate: DateTime(2100));
-
-                  if (pickedDate != null) {
-                    String formattedDate =
-                        DateFormat('yyyy-MM-dd').format(pickedDate);
-
-                    setState(() {
-                      dateInput.text = formattedDate;
-                    });
-                  }
-                },
-              )
+             
             ],
           ),
         ),
